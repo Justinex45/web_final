@@ -1,0 +1,416 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: #fafafa;
+  color: #333;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: auto;
+  background: none;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  border: none;
+  text-align: left;
+  font-size: 1.5rem;
+  font-weight: bold;
+  z-index: 1000;
+  color: #333;
+}
+
+.search-bar {
+  position: fixed;
+  margin-top: 100px;
+  left: 30px;
+  width: 400px;
+  text-align: left;
+  z-index: 1001;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: box-shadow 0.3s, background 0.3s;
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 0.7rem 1.2rem;
+  border: 1.5px solid #b3d6f7;
+  border-radius: 24px;
+  font-size: 1.08rem;
+  background: #fafdff;
+  color: #222;
+  transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+  box-shadow: 0 2px 8px rgba(0,120,212,0.06);
+}
+
+.search-bar input:focus {
+  border-color: #0078D4;
+  background: #fff;
+  box-shadow: 0 4px 16px rgba(0,120,212,0.12);
+  outline: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 28px;
+  font-size: 1.1rem;
+}
+
+
+.search-bar input:focus {
+  outline: none;
+  border-color: #007AFF;
+}
+
+.feed {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.movie-card {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.movie-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.movie-card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.movie-card .info {
+  padding: 1rem;
+}
+
+.movie-card .category-tag {
+  font-size: 0.85rem;
+  color: #007AFF;
+  margin-bottom: 0.5rem;
+}
+
+.movie-card .title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.movie-card .year {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.movie-card .rating {
+  font-size: 0.9rem;
+  color: #ff9800;
+  margin: 0.25rem 0;
+}
+
+.movie-card .plot {
+  font-size: 0.95rem;
+  color: #444;
+  margin-top: 0.5rem;
+  line-height: 1.4;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #eee;
+  border-top-color: #007AFF;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 1rem auto;
+  display: none;
+}
+
+.category-nav {
+  position: fixed;
+  width: 100%;
+  top: 0px;
+  z-index: 999;
+  padding: 1rem 0.5rem;
+  text-align: center;
+  background: rgba(255,255,255,0.95);
+  border-bottom: 1px solid #e0e6ed;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  backdrop-filter: blur(4px);
+}
+
+.category-nav ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-wrap: wrap;
+}
+
+.category-nav li {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f5faff 60%, #e3f0ff 100%);
+  border: 2px solid #0078D4;
+  box-shadow: 0 2px 8px rgba(0,120,212,0.08);
+  transition: background 0.3s, transform 0.2s, border-color 0.3s, box-shadow 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.category-nav li.selected {
+  background: linear-gradient(135deg, #0078D4 60%, #0057A1 100%);
+  border-color: #0057A1;
+  box-shadow: 0 4px 16px rgba(0,120,212,0.18);
+}
+
+.category-nav li:hover {
+  background: linear-gradient(135deg, #0078D4 60%, #0057A1 100%);
+  transform: scale(1.12);
+  border-color: #0057A1;
+  box-shadow: 0 6px 20px rgba(0,120,212,0.22);
+}
+
+.category-nav li a {
+  text-decoration: none;
+  color: #0078D4;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  transition: color 0.3s;
+  padding: 0 8px;
+}
+
+.category-nav li:hover a,
+.category-nav li.selected a {
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .category-nav {
+    padding: 0.5rem 0.2rem;
+  }
+  .category-nav ul {
+    gap: 10px;
+  }
+  .category-nav li {
+    width: 36px;
+    height: 36px;
+  }
+  .category-nav li a {
+    font-size: 12px;
+    padding: 0 4px;
+  }
+}
+.movie-detail {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  overflow-y: auto; /* 支援滾動 */
+}
+
+.detail-content {
+  position: relative;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 500px;
+  width: 90%;
+  border-radius: 10px;
+  text-align: center;
+  max-height: 90vh; /* 限制最大高度 */
+  overflow-y: auto; /* 內容過長時可滾動 */
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+.close-btn:hover {
+  background-color: rgba(200, 200, 200, 0.5);
+}
+
+.movie-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.movie-plot {
+  font-size: 1rem;
+  margin: 10px 0;
+  color: #555;
+  line-height: 1.5;
+}
+
+.movie-director, .movie-actors {
+  font-size: 14px;
+  margin: 5px 0;
+  color: #777;
+}
+
+.movie-poster {
+  width: 100%;
+  max-height: 400px;
+  object-fit: contain;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.movie-rating {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #ff9800;
+  margin: 5px 0;
+}
+
+.site-footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+  color: #777;
+}
+
+.sort-header {
+  position: fixed;
+  top: 90px;
+  right: 0;
+  left: 0;
+  z-index: 999;
+  max-width: 600px;
+  margin: 10px auto 0 auto;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 1rem;
+  pointer-events: none;
+}
+
+.sort-header > * {
+  pointer-events: auto;
+}
+
+#sortSelect {
+  padding: 8px 12px;
+  border-radius: 20px; /* 與搜尋欄一致的圓角 */
+  border: 1px solid #0078D4;
+  background: #fff;
+  color: #0078D4;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+#sortSelect:focus,
+#sortSelect:hover {
+  border-color: #0057A1;
+  color: #0057A1;
+  outline: none;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 響應式設計 */
+@media (max-width: 600px) {
+  header {
+    font-size: 1.2rem;
+  }
+
+  .search-bar input {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .category-nav ul {
+    gap: 10px;
+  }
+
+  .category-nav li {
+    width: 50px;
+    height: 50px;
+  }
+
+  .category-nav li a {
+    font-size: 12px;
+  }
+
+  .movie-card {
+    margin-bottom: 1rem;
+  }
+
+  .movie-card img {
+    height: 200px; /* 移動設備上縮小圖片 */
+  }
+
+  .movie-card .title {
+    font-size: 1rem;
+  }
+
+  .movie-card .plot {
+    font-size: 0.9rem;
+  }
+
+  .detail-content {
+    padding: 15px;
+    width: 95%;
+  }
+
+  .movie-title {
+    font-size: 1.2rem;
+  }
+
+  .movie-plot {
+    font-size: 0.9rem;
+  }
+
+  .sort-header {
+    justify-content: center;
+  }
+
+  #sortSelect {
+    width: 100%;
+    max-width: 200px;
+  }
+}

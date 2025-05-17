@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>電影探索站 - 科幻</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>🎬 電影探索站</header>
+  <nav class="category-nav">
+    <ul>
+      <li><a href="index.html">🏠</a></li>
+      <li class="selected"><a href="科幻.html">科幻</a></li>
+      <li><a href="動作.html">動作</a></li>
+      <li><a href="動畫.html">動畫</a></li>
+      <li><a href="喜劇.html">喜劇</a></li>
+      <li><a href="愛情.html">愛情</a></li>
+      <li><a href="驚悚.html">驚悚</a></li>
+    </ul>
+  </nav>
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="搜尋電影名稱，按 Enter 搜尋." />
+  </div>
+  <div class="feed" id="feed"></div>
+  <div id="spinner" class="spinner"></div>
+<div id="movieDetail" class="movie-detail">
+  <div class="detail-content">
+    <button id="closeDetail" class="close-btn">✖</button>
+    <div id="detailTitle" class="movie-title"></div>
+    <div id="detailPlot" class="movie-plot"></div>
+    <img id="detailPoster" class="movie-poster" />
+    <div id="detailRating" class="movie-rating"></div>
+    <div id="detailDirector" class="movie-director"></div>
+    <div id="detailActors" class="movie-actors"></div>
+  </div>
+</div>
+  <script src="main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      hideSpinner();
+      renderCategory('科幻');
+    });
+  </script>
+</body>
+<footer class="site-footer">
+  © 製作者 : 盧柏安、王建驊、吳邱翰、王耀賢、葉進富&nbsp;&nbsp;2025 (copyright reserved).
+</footer>
+</html>
